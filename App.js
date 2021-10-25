@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
+import AppLoading from 'expo-app-loading';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-import AppLoading from 'expo-app-loading';
+import store from './store/config/store.config';
 
 const fetchFonts = () => {
   return Font.loadAsyn({
@@ -26,10 +27,12 @@ export default function App() {
   }
 
   return (
-    <View style={styles.container}>
-      <Text>Welcome to React-Native App</Text>
-      <StatusBar style='auto' />
-    </View>
+    <Provider store={store}>
+      <View style={styles.container}>
+        <Text>Welcome to React-Native App</Text>
+        <StatusBar style='auto' />
+      </View>
+    </Provider>
   );
 }
 
