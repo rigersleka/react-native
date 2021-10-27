@@ -5,10 +5,14 @@ import { StyleSheet } from 'react-native';
 
 /* Navigation Imports */
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import {
+  createStackNavigator,
+  CardStyleInterpolators,
+} from '@react-navigation/stack';
 import DetailsScreen from './components/DetailsScreen';
 import Home from './components/Home';
 import store from './store/config/store.config';
+import ModalScreen from './components/ModalScreen';
 
 const fetchFonts = () => {
   return Font.loadAsyn({
@@ -17,9 +21,6 @@ const fetchFonts = () => {
   });
 };
 
-/**
- * createStackNavigatorProvides a way for your app to transition between screens, where each new screen is placed on top of a stack.
- */
 const Stack = createStackNavigator();
 
 export default function App() {
@@ -40,9 +41,34 @@ export default function App() {
   return (
     <Provider store={store}>
       <NavigationContainer style={styles.container}>
-        <Stack.Navigator>
-          <Stack.Screen name='Home' component={Home} />
-          <Stack.Screen name='DetailsScreen' component={DetailsScreen} />
+        <Stack.Navigator
+          initialRouteName='Home'
+          screenOptions={{
+            headerMode: 'screen',
+            headerTintColor: 'white',
+            headerStyle: { backgroundColor: 'tomato' },
+          }}
+        >
+          <Stack.Screen
+            name='Home'
+            component={Home}
+            options={{
+              title: 'Awesome app',
+            }}
+          />
+          <Stack.Screen
+            name='DetailsScreen'
+            component={DetailsScreen}
+            options={{
+              title: 'Details',
+              cardStyleInterpolator:
+                CardStyleInterpolators.forFadeFromBottomAndroid,
+            }}
+          />
+          <Stack.Screen 
+            name="Modal"
+            component={ModalScreen}
+            options={{ presentation: 'transparentModal' }}/>
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>
