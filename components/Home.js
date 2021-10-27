@@ -9,6 +9,10 @@ const Home = ({ navigation }) => {
         title='Go to Details'
         onPress={() => navigation.navigate('DetailsScreen')}
       />
+      <Button
+        title='Go to ModalScreen'
+        onPress={() => navigation.navigate('Modal')}
+      />
     </View>
   );
 };
